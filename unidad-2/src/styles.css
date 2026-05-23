@@ -1,0 +1,22 @@
+body {
+    /* Ruta de tu imagen */
+    background-image: url('/images/fondo.png'); 
+    
+    /* Escala la imagen para cubrir toda la ventana sin deformarse */
+    background-size: cover; 
+    
+    /* Centra la imagen horizontal y verticalmente */
+    background-position: center center; 
+    
+    /* Evita que la imagen se repita como mosaico */
+    background-repeat: no-repeat; 
+    
+    /* Mantiene el fondo fijo al hacer scroll (opcional pero recomendado) */
+    background-attachment: fixed; 
+    
+    /* Elimina los márgenes por defecto del navegador */
+    margin: 0; 
+    
+    /* Asegura que el body mida como mínimo el alto total de la ventana */
+    min-height: 100vh; 
+}

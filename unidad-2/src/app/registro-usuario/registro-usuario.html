@@ -1,0 +1,92 @@
+<div class="form-registro" >
+    @if(!datosEnviados) {
+    <h2>Registro de Usuario</h2>
+    <form [formGroup]="formularioRegistro" (ngSubmit)="submitRegistro()">
+        <div class="form-grupo">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input id="email" formControlName="email" type="email" 
+            [ngClass]="{'invalid-input': formularioRegistro.get('email')?.invalid 
+            && 
+            formularioRegistro.get('email')?.touched,
+            'valid-input': formularioRegistro.get('email')?.valid 
+            && 
+            formularioRegistro.get('email')?.touched}"
+            />
+            <small class="mensaje-error" *ngIf="getFormularioError('email')" >
+                {{ getFormularioError('email') }}
+            </small>
+        </div>
+        <div class="form-grupo" >
+            <label for="nombre" class="form-label">Nombre</label>
+            <input id="nombre" formControlName="nombre" type="text" 
+            [ngClass]="{'invalid-input': formularioRegistro.get('nombre')?.invalid 
+            && 
+            formularioRegistro.get('nombre')?.touched,
+            'valid-input': formularioRegistro.get('nombre')?.valid 
+            && 
+            formularioRegistro.get('nombre')?.touched}"
+            />
+            @if(getFormularioError('nombre')) {
+            <small class="mensaje-error">{{ getFormularioError('nombre') }}</small>
+            }
+        </div> 
+        <div class="form-grupo">
+            <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+            <input id="fechaNacimiento" formControlName="fechaNacimiento" type="date" 
+            [ngClass]="{'invalid-input': formularioRegistro.get('fechaNacimiento')?.invalid 
+            && 
+            formularioRegistro.get('fechaNacimiento')?.touched,
+            'valid-input': formularioRegistro.get('fechaNacimiento')?.valid 
+            && 
+            formularioRegistro.get('fechaNacimiento')?.touched}"/>
+            @if(getFormularioError('fechaNacimiento')) {
+            <small class="mensaje-error">{{ getFormularioError('fechaNacimiento') }}</small>
+            }
+        </div>
+        <div class="form-grupo">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" formControlName="password" type="password" 
+            [ngClass]="{'invalid-input': formularioRegistro.get('password')?.invalid 
+            && 
+            formularioRegistro.get('password')?.touched,
+            'valid-input': formularioRegistro.get('password')?.valid 
+            && 
+            formularioRegistro.get('password')?.touched}"/>
+            @if(getFormularioError('password')) {
+            <small class="mensaje-error">{{ getFormularioError('password') }}</small>
+            }
+        </div>
+        <div class="form-grupo">
+            <label for="passwordRepeat" class="form-label">Repita su password</label>
+            <input id="passwordRepeat" formControlName="passwordRepeat" type="password" 
+            [ngClass]="{'invalid-input': formularioRegistro.get('passwordRepeat')?.invalid 
+            && 
+            formularioRegistro.get('passwordRepeat')?.touched,
+            'valid-input': formularioRegistro.get('passwordRepeat')?.valid 
+            && 
+            formularioRegistro.get('passwordRepeat')?.touched}"/>
+            @if(getFormularioError('passwordRepeat')) {
+            <small class="mensaje-error">{{ getFormularioError('passwordRepeat') }}</small>
+            }
+        </div>
+        <div class="form-grupo">
+            <label for="mensaje" class="form-label">Mensaje al profesor</label>
+            <textarea id="mensaje" formControlName="mensaje" rows="4" cols="50"></textarea>
+        </div>
+        <div class="form-grupo">
+            <button type="submit" class="form-btn" [disabled]="formularioRegistro.invalid || (formularioRegistro.get('passwordRepeat')?.value !== this.formularioRegistro.get('password')?.value)">Registrar</button>
+        </div>
+    </form>
+}
+
+@if(datosEnviados) {
+    <!-- Sección que se muestra después del submit -->
+    <div class="form-registro">
+        <h3>Usuario registrado correctamente!</h3>
+        <p><strong>Correo electrónico:</strong> {{ formularioRegistro.get('email')?.value }}</p>
+        <p><strong>Nombre:</strong> {{ formularioRegistro.get('nombre')?.value }}</p>
+        <p><strong>Fecha de nacimiento:</strong> {{ formularioRegistro.get('fechaNacimiento')?.value ? (formularioRegistro.get('fechaNacimiento')?.value | date: 'dd/MM/yyyy') : 'Sin fecha'   }}</p>
+    </div>
+}
+
+</div>
